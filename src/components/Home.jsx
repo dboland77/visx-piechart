@@ -46,14 +46,27 @@ export default function Home() {
               });
             }}
           </Pie>
-          <Text textAnchor="middle" fill="#000" fontSize={40} dy={-20}>
-            {`£${Math.floor(
-              coins.reduce((acc, coin) => acc + coin.amount * coin.inGBP, 0)
-            )}`}
-          </Text>
-          <Text textAnchor="middle" fill="#000" fontSize={40} dy={20}>
-            {`${coins.length} Assets`}
-          </Text>
+          {active ? (
+            <>
+              <Text textAnchor="middle" fill="#000" fontSize={40} dy={-20}>
+                {`£${Math.floor(active.amount * active.inGBP)}`}
+              </Text>
+              <Text textAnchor="middle" fill={active.colour} fontSize={20} dy={20}>
+                {`${active.amount} ${active.symbol}`}
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text textAnchor="middle" fill="#000" fontSize={40} dy={-20}>
+                {`£${Math.floor(
+                  coins.reduce((acc, coin) => acc + coin.amount * coin.inGBP, 0)
+                )}`}
+              </Text>
+              <Text textAnchor="middle" fill="#aaa" fontSize={20} dy={20}>
+                {`${coins.length} Assets`}
+              </Text>
+            </>
+          )}
         </Group>
       </svg>
     </main>
