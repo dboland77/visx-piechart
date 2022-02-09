@@ -6,7 +6,7 @@ import { Text } from "@visx/text";
 const coins = [
   { symbol: "ADA", amount: 200, colour: "#0033ad", inGBP: 1.48 },
   { symbol: "SOL", amount: 5, colour: "#00ffbd", inGBP: 37.6 },
-  { symbol: "BTC", amount: 0.005, colour: "#F7931A", inGBP: 37363 },
+  { symbol: "BTC", amount: 0.005, colour: "#F7931A", inGBP: 40000 },
 ];
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
             pieValue={(data) => data.amount * data.inGBP}
             outerRadius={half}
             innerRadius={({ data }) => {
-              const padSize = active && active.symbol == data.symbol ? 12 : 8;
+              const padSize = active && active.symbol === data.symbol ? 12 : 8;
               return half - padSize;
             }}
             padAngle={0.01}
@@ -46,6 +46,11 @@ export default function Home() {
               });
             }}
           </Pie>
+          <Text textAnchor="middle" fill="#000">
+            {`£${Math.floor(
+              coins.reduce((acc, coin) => acc + coin.amount * coin.inGBP, 0)
+            )}`}
+          </Text>
         </Group>
       </svg>
     </main>
