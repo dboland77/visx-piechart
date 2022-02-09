@@ -10,5 +10,20 @@ const coins = [
 ];
 
 export default function Home() {
-  return <main>PIE</main>
+  const width = 400;
+  const half = width / 2;
+
+  return (
+    <main>
+      <svg width={width} height={width}>
+        <Group top={half} left={half}>
+          <Pie 
+          data={coins} 
+          pieValue={data => data.amount*data.inGBP}
+          outerRadius={half}
+          ></Pie>
+        </Group>
+      </svg>
+    </main>
+  );
 }
