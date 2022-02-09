@@ -10,31 +10,41 @@ const coins = [
 ];
 
 export default function Home() {
+  const [active, setActive] = useState(null);
   const width = 400;
   const half = width / 2;
-  const padSize = 8;
 
   return (
     <main>
       <svg width={width} height={width}>
         <Group top={half} left={half}>
-          <Pie 
-          data={coins} 
-          pieValue={data => data.amount*data.inGBP}
-          outerRadius={half}
-          innerRadius={half-padSize}
-          padAngle = {0.01}
-          >
-            {pie => {
-              return pie.arcs.map(arc => {
-                return (
-                  <g key ={arc.data.symbol}>
-                    <path d={pie.path(arc)} fill={arc.data.colour}></path>
-                  </g>)
-              })
+          <Pie
+            data={coins}
+            pieValue={(data) => data.amount * data.inGBP}
+            outerRadius={half}
+            innerRadius={({ data }) => {
+              const padSize = active && active.symbol == data.symbol ? 12 : 8;
+              return half - padSize;
             }}
-
-
+            padAngle={0.01}
+          >
+            {(pie) => {
+              return pie.arcs.map((arc) => {
+                return (
+                  <g
+                    key={arc.data.symbol}
+                    onMouseEnter={() => {
+                      setActive(arc.data);
+                    }}
+                    onMouseLeave={() => {
+                      setActive(null);
+                    }}
+                  >
+                    <path d={pie.path(arc)} fill={arc.data.colour}></path>
+                  </g>
+                );
+              });
+            }}
           </Pie>
         </Group>
       </svg>
