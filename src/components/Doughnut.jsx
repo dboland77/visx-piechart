@@ -9,7 +9,7 @@ const coins = [
   { symbol: "BTC", amount: 0.005, colour: "#F7931A", inGBP: 40000 },
 ];
 
-export default function Home() {
+export default function Doughnut() {
   const [active, setActive] = useState(null);
   const width = 400;
   const half = width / 2;
@@ -51,7 +51,12 @@ export default function Home() {
               <Text textAnchor="middle" fill="#000" fontSize={40} dy={-20}>
                 {`£${Math.floor(active.amount * active.inGBP)}`}
               </Text>
-              <Text textAnchor="middle" fill={active.colour} fontSize={20} dy={20}>
+              <Text
+                textAnchor="middle"
+                fill={active.colour}
+                fontSize={20}
+                dy={20}
+              >
                 {`${active.amount} ${active.symbol}`}
               </Text>
             </>
