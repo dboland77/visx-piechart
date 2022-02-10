@@ -27,6 +27,8 @@ export type DragIProps = {
 };
 
 export default function DragI({ width, height }: DragIProps) {
+  width = 1000;
+  height=400;
   const [draggingItems, setDraggingItems] = useState<Circle[]>([]);
 
   useEffect(() => {
